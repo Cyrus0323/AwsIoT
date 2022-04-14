@@ -6,15 +6,15 @@ var awsIoT = require("aws-iot-device-sdk");
 var moment = require("moment");
 var lodash = require("lodash");
 
-var uid = "9225cba7-cefb-41cd-aecd-c2b8e9efa3c3"; // IoT sensor uid
+var uid = "5540a8ae-64ef-404b-aaa1-da010de7a638"; // IoT sensor uid
 
 var sensor = awsIoT.device({
   keyPath:
-    "./cert/sensor/0e45ae1debffee602848b465bb30f523fa0bffa7b3e8005010556ad48debd626-private.pem.key",
+    "./cert/sensor/daba7c709dc1c3621100bc0611fc2f359c19f7cf1d3c3c9f493245214b73d8e5-private.pem.key",
   certPath:
-    "./cert/sensor/0e45ae1debffee602848b465bb30f523fa0bffa7b3e8005010556ad48debd626-certificate.pem.crt",
+    "./cert/sensor/daba7c709dc1c3621100bc0611fc2f359c19f7cf1d3c3c9f493245214b73d8e5-certificate.pem.crt",
   caPath: "./cert/sensor/AmazonRootCA1.pem",
-  clientId: "9225cba7-cefb-41cd-aecd-c2b8e9efa3c3",
+  clientId: `${uid}`,
   host: "a3cbh27rhb0fvj-ats.iot.us-east-1.amazonaws.com",
   port: 8883,
 });
@@ -30,7 +30,7 @@ sensor.on("connect", async function () {
       `DCS/pulseSensor/${uid}`,
       JSON.stringify({
         timeStamp: moment().local().format(),
-        bpm: lodash.random(101, 150),
+        bpm: lodash.random(60, 100),
       })
     );
 

@@ -10,18 +10,18 @@ AWS.config.update({
 //--------------------------------User Sign Up-----------------------------------------
 // After user sign up a new account
 // The system should automatically assigned a new uid for each user
-var uid = "2b54fd90-d74a-4d4a-af2c-7863f696c150";
+var uid = "622af3b7-43b0-438a-95d6-b3240f6ead48"; //patientID
 //-------------------------------------------------------------------------------------
 
 // In real world situation, it is not encouraged multiple devices connect to the same certificate due to security issues
 // Each new user account, the system should automate the process of creating and assigning new certificate for each new user
 var device = awsIoT.device({
   keyPath:
-    "./cert/mobile/d4f36feaa2572f712ad89898833e8eedae9682dce4a1542518fcb42a65a604bb-private.pem.key",
+    "./cert/mobile/1f422a3bbdeb5f21b26dbaaa57530e9c2bd19f2a9bbc1d532e98aed8e279ec84-private.pem.key",
   certPath:
-    "./cert/mobile/d4f36feaa2572f712ad89898833e8eedae9682dce4a1542518fcb42a65a604bb-certificate.pem.crt",
+    "./cert/mobile/1f422a3bbdeb5f21b26dbaaa57530e9c2bd19f2a9bbc1d532e98aed8e279ec84-certificate.pem.crt",
   caPath: "./cert/mobile/AmazonRootCA1.pem",
-  clientId: "2b54fd90-d74a-4d4a-af2c-7863f696c150",
+  clientId: `${uid}`,
   host: "a3cbh27rhb0fvj-ats.iot.us-east-1.amazonaws.com",
   port: 8883,
 });
@@ -29,12 +29,12 @@ var device = awsIoT.device({
 //---------------------------------Login-------------------------------------
 // require id_token in postman
 const accessToken =
-  "eyJraWQiOiJ6c3lZcldzcjR3UTE4S0FZYVdTVVhQUW54TzJkN0tnMFdxOG9ZS2FqSU84PSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiNlRDa2hVY0VKV0l5RHY5MzFHenlRdyIsInN1YiI6IjJiNTRmZDkwLWQ3NGEtNGQ0YS1hZjJjLTc4NjNmNjk2YzE1MCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9haHZDV0xLdjUiLCJjb2duaXRvOnVzZXJuYW1lIjoiMmI1NGZkOTAtZDc0YS00ZDRhLWFmMmMtNzg2M2Y2OTZjMTUwIiwiYXVkIjoiOW9wNXNrZDA0ZHJ0MGlxOGM3a3RxZW5uciIsImV2ZW50X2lkIjoiYjM3ODcyYmUtODU3Yy00ZjhkLWI4MWQtNDAzMWIyZGJiOGZiIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NDgzOTczNjcsImV4cCI6MTY0ODQwMDk2NywiaWF0IjoxNjQ4Mzk3MzY3LCJqdGkiOiIyMWI0MTVhMS0yZmQ0LTRlYzctOWQ3NS1hYTNhYjRjOTMxZDAiLCJlbWFpbCI6ImNsZWVqaWUyMDBAZ21haWwuY29tIn0.Xe05Mb4plQWek9JEPdurUjjeufU7XjHJHy8TjAwV09F4Y2jdB7GAIgt-8qZAkiwcXYxPT3xt7G1DjQPND7lW1rjUt57NKV7BiI8vBnINt1nrcyBNgaaYZNXTpoKoPSBLU6gKBBCQts0FtEVICQtZZu3-mk1VqYgr8r1kWje5_17gUpHxxY9bZEEux60ec-rgEVcC0BMjmvh5IzEsvwW7lLHfPFCGitVAx2gzh6oNf9MYXk14HokvBteTV5zuBjxnrvKr0BuZS_O7cAFjkjRw9pFRwB2qYUMJ69SR1rlN7TU0ygYlAqo2HyzjTo32xS4GepBLnPCmZgoGwUCTFhN0Ow";
-const user_id = "2b54fd90-d74a-4d4a-af2c-7863f696c150";
+  "eyJraWQiOiI5TE5rTEdTUlNDTnpKdUcxdmFkWjdxRXJsTnd5NGljaFJUTTJmRkpUNkJzPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiME4yQWlKb01XSjFDZndOZUl1aGZvUSIsInN1YiI6IjYyMmFmM2I3LTQzYjAtNDM4YS05NWQ2LWIzMjQwZjZlYWQ0OCIsImF1ZCI6IjdiMWE0OTBrYXE3ZmczMTQ0dTVlMzBkaWJuIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQ5OTIxNTY2LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9iODc4a1VmSUMiLCJjb2duaXRvOnVzZXJuYW1lIjoiNjIyYWYzYjctNDNiMC00MzhhLTk1ZDYtYjMyNDBmNmVhZDQ4IiwiZXhwIjoxNjQ5OTI1MTY2LCJpYXQiOjE2NDk5MjE1NjYsImp0aSI6IjY4YmIxNmU4LTI5ZjYtNDYwYy05ZDRhLTc2ZTkxMzFhOGYzOSIsImVtYWlsIjoiY2xlZWppZTIwMEBnbWFpbC5jb20ifQ.XWBYLIXq2lhCiMCwo_LeKxs1U-rVJkF_PfmYveZ-nbQnMqyeA26U14h4Bf1Re7oJMevzFTnpBXFPW2sRHOYOQtGpm9AxncNUfUaZlUATmQ5ZivCc08yCcjqm9fdiN5rqS6uRIV-67_XoJSMM5faq1Qjlg11ovJXaZCa6fJpm675Xv8POAKq9r736VTxApK_C5f0E_CdafwP0SGaZYsZbiVjvm1jF3NSVodVwc6ithE0ZIwdHZgu1IY4ipSforF_JfM5ekgXXqfLQbwlopXjkyRJQR6Nfk3REWgKCfth8MbB44FX-4FEtkGuXY9SyKld9oaJWGTEboJzKK9vN8cU9ow";
+// uid = "622af3b7-43b0-438a-95d6-b3240f6ead48"
 //---------------------------------------------------------------------------
 
 //---------------------------------User Interface-------------------------------------
-var input = "9225cba7-cefb-41cd-aecd-c2b8e9efa3c3"; // sensor uid
+var input = "5540a8ae-64ef-404b-aaa1-da010de7a638"; // sensor uid
 var consecutiveHighBPM = 0;
 var userEmail = "cleejie200@gmail.com";
 
@@ -54,7 +54,6 @@ device.on("message", async function (topic, payload) {
   console.log(message.timeStamp, message.bpm);
 
   // compare bpm
-  console.log(typeof message.bpm);
   if (message.bpm < 60 || message.bpm > 100) {
     consecutiveHighBPM++;
     console.log(consecutiveHighBPM);
@@ -66,7 +65,7 @@ device.on("message", async function (topic, payload) {
   var xhttp = new XMLHttpRequest();
   xhttp.open(
     "PUT",
-    "https://sdkjy94qwg.execute-api.us-east-1.amazonaws.com/beta/sensor",
+    "https://yb192pp3r0.execute-api.us-east-1.amazonaws.com/demo/demo-dynamodb",
     true
   );
   xhttp.setRequestHeader("Authorization", "Bearer " + accessToken);
@@ -79,10 +78,10 @@ device.on("message", async function (topic, payload) {
 
   var iotData = {
     operation: "update",
-    tableName: "DCS-Heart_Failure_Monitoring",
+    tableName: "dcs-demo-patient",
     payload: {
       Key: {
-        patient_key: `${user_id}`,
+        patientID: `${uid}`,
       },
       UpdateExpression: "SET pulse = list_append(pulse, :p)",
       ExpressionAttributeValues: {
