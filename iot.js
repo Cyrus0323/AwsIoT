@@ -31,6 +31,7 @@ sensor.on("connect", async function () {
       JSON.stringify({
         timeStamp: moment().local().format(),
         bpm: lodash.random(60, 100),
+        // bpm: lodash.random(101, 150),
       })
     );
 

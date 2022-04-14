@@ -9,7 +9,7 @@ AWS.config.update({
 
 //--------------------------------User Sign Up-----------------------------------------
 // After user sign up a new account
-// The system should automatically assigned a new uid for each user
+// Cognito should automatically assigned a new uid for each user
 var uid = "622af3b7-43b0-438a-95d6-b3240f6ead48"; //patientID
 //-------------------------------------------------------------------------------------
 
@@ -98,9 +98,9 @@ device.on("message", async function (topic, payload) {
 
   xhttp.send(JSON.stringify(iotData));
 
-  if (consecutiveHighBPM >= 1) {
+  if (consecutiveHighBPM >= 10) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://sdkjy94qwg.execute-api.us-east-1.amazonaws.com/beta/analysis", true);
+    xhr.open("POST", "https://yb192pp3r0.execute-api.us-east-1.amazonaws.com/demo/dcs-demo-sns", true);
     xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onload = () => {
@@ -110,7 +110,7 @@ device.on("message", async function (topic, payload) {
     };
 
     var iotAnalyse = {
-      message: `${userEmail} needs attention!!!`,
+      message: `${userEmail} needs attention!!!`, // notification content
     };
 
     xhr.send(JSON.stringify(iotAnalyse));
